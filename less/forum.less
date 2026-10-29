@@ -1,0 +1,1015 @@
+// Moments. Built on Flarum's own variables, so it follows the forum's colours,
+// light and dark, and sits in the default page layout beside the sidebar.
+
+@moments-gap: 12px;
+
+// ── Page ────────────────────────────────────────────────────────────────────
+
+.MomentsPage-head {
+  display: flex;
+  align-items: center;
+  gap: @moments-gap;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.MomentsPage-title {
+  margin: 0;
+  font-size: 1.4em;
+  flex: 1 1 auto;
+}
+.MomentsPage-search {
+  position: relative;
+  flex: 0 1 260px;
+  min-width: 0;
+
+  .fa-magnifying-glass {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted-color);
+    pointer-events: none;
+  }
+  .FormControl {
+    padding-left: 32px;
+  }
+}
+.MomentsPage-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 16px 0 12px;
+  border-bottom: 1px solid var(--control-bg);
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  .Button {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    white-space: nowrap;
+    color: var(--muted-color);
+
+    &.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+      font-weight: bold;
+      background: none;
+    }
+  }
+}
+.MomentsPage-topics {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+.MomentsPage-topicsLabel {
+  font-size: 0.85em;
+  color: var(--muted-color);
+  font-weight: bold;
+  margin-right: 2px;
+}
+.MomentTopicChip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--control-bg);
+  color: var(--control-color);
+  font-size: 0.85em;
+
+  &:hover {
+    text-decoration: none;
+    background: var(--control-bg-shaded);
+  }
+}
+.MomentsPage-searching {
+  color: var(--muted-color);
+  margin-bottom: 12px;
+}
+.MomentPage-back {
+  margin-bottom: 12px;
+}
+
+// ── Composer ────────────────────────────────────────────────────────────────
+
+.MomentComposer {
+  display: flex;
+  gap: @moments-gap;
+  padding: 14px;
+  border: 1px solid var(--control-bg);
+  border-radius: var(--border-radius);
+  background: var(--body-bg);
+  margin-bottom: 4px;
+
+  &--placeholder {
+    min-height: 82px;
+  }
+  &--loading {
+    justify-content: center;
+  }
+  &--compact {
+    padding: 10px;
+    margin: 8px 0;
+  }
+}
+.MomentComposer-avatar .Avatar {
+  --size: 40px;
+}
+.MomentComposer-main {
+  flex: 1;
+  min-width: 0;
+}
+.MomentComposer-editor {
+  .TextEditor-editor {
+    width: 100%;
+    min-height: 44px;
+    max-height: 40vh;
+    resize: vertical;
+    border: 0;
+    padding: 6px 0;
+    background: transparent;
+    font-size: 15px;
+    box-shadow: none;
+    transition: min-height 0.15s;
+
+    &:focus {
+      background: transparent;
+    }
+  }
+  .TextEditor-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 0;
+  }
+  .TextEditor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+  .TextEditor-controls > li {
+    min-width: 0;
+    max-width: 100%;
+  }
+  // On a phone the buttons scroll in one row instead of leaving one alone on a second line.
+  @media @phone {
+    .TextEditor-controls,
+    .TextEditor-toolbar {
+      flex-wrap: nowrap;
+    }
+    .TextEditor-toolbar {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+  }
+}
+.MomentComposer.is-active .TextEditor-editor {
+  min-height: 84px;
+}
+.MomentComposer--compact.is-active .TextEditor-editor {
+  min-height: 60px;
+}
+.MomentComposer-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+}
+.MomentComposer-attachment {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background: var(--control-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img,
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.MomentComposer-voice {
+  font-size: 0.8em;
+  color: var(--control-color);
+  text-align: center;
+  padding: 4px;
+}
+.MomentComposer-detach {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.MomentComposer-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--control-bg);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+.MomentComposer-tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: auto;
+}
+.MomentComposer-tool {
+  color: var(--primary-color);
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+}
+.MomentComposer-gifLabel {
+  font-size: 10px;
+  font-weight: bold;
+  border: 1.5px solid currentColor;
+  border-radius: 4px;
+  padding: 0 3px;
+  line-height: 14px;
+}
+.MomentComposer-privacy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted-color);
+  font-size: 0.9em;
+
+  .Select {
+    display: inline-block;
+  }
+  .FormControl {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    height: auto;
+    font-size: 13px;
+  }
+}
+.MomentComposer-count {
+  min-width: 2ch;
+  text-align: right;
+  font-size: 0.85em;
+  color: var(--muted-color);
+
+  &.is-near {
+    color: var(--control-warning-color, #b07500);
+  }
+  &.is-over {
+    color: var(--error-color, #d83e3e);
+    font-weight: bold;
+  }
+}
+.MomentComposer-post {
+  min-width: 72px;
+}
+
+// ── Voice recorder & GIF picker ─────────────────────────────────────────────
+
+.MomentVoiceRecorder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border-radius: var(--border-radius);
+  background: var(--control-bg);
+
+  audio {
+    height: 36px;
+    max-width: 100%;
+  }
+  &--error {
+    color: var(--error-color, #d83e3e);
+  }
+}
+.MomentVoiceRecorder-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e0245e;
+  animation: MomentPulse 1.2s ease-in-out infinite;
+}
+.MomentVoiceRecorder-time {
+  font-variant-numeric: tabular-nums;
+  font-weight: bold;
+}
+.MomentVoiceRecorder-label {
+  color: var(--muted-color);
+  margin-right: auto;
+}
+@keyframes MomentPulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .MomentVoiceRecorder-dot {
+    animation: none;
+  }
+}
+
+.MomentGifPicker {
+  margin: 8px 0;
+  border: 1px solid var(--control-bg);
+  border-radius: var(--border-radius);
+  background: var(--body-bg);
+  padding: 8px;
+}
+.MomentGifPicker-head {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.MomentGifPicker-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.MomentGifPicker-item {
+  border: 0;
+  padding: 0;
+  background: var(--control-bg);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+.MomentGifPicker-empty {
+  grid-column: ~'1 / -1';
+  text-align: center;
+  color: var(--muted-color);
+}
+.MomentGifPicker-credit {
+  font-size: 11px;
+  color: var(--muted-color);
+  text-align: right;
+  margin-top: 6px;
+}
+
+// ── Feed ────────────────────────────────────────────────────────────────────
+
+.MomentFeed {
+  position: relative;
+}
+.MomentFeed-fresh {
+  position: sticky;
+  top: calc(var(--header-height) + 10px);
+  z-index: 2;
+  display: flex;
+  margin: 8px auto;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+.MomentFeed-more {
+  display: block;
+  margin: 16px auto;
+}
+.MomentFeed-sentinel {
+  height: 1px;
+}
+
+// ── Card ────────────────────────────────────────────────────────────────────
+
+.MomentCard {
+  display: flex;
+  gap: @moments-gap;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--control-bg);
+
+  &--hidden {
+    opacity: 0.6;
+  }
+  &--focus {
+    background: var(--body-bg-shaded, var(--control-bg-light));
+    border-radius: var(--border-radius);
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  &--repost {
+    display: block;
+
+    > .MomentCard {
+      border-bottom: 0;
+      padding-top: 4px;
+    }
+  }
+  &--compact {
+    padding: 10px;
+    border: 0;
+  }
+}
+.MomentCard-avatar .Avatar {
+  --size: 40px;
+}
+.MomentCard--compact .MomentCard-avatar .Avatar {
+  --size: 28px;
+}
+.MomentCard-main {
+  flex: 1;
+  min-width: 0;
+}
+.MomentCard-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  line-height: 1.4;
+  font-size: 14px;
+}
+.MomentCard-author {
+  font-weight: bold;
+  color: var(--heading-color);
+}
+.MomentCard-time,
+.MomentCard-edited,
+.MomentCard-privacy,
+.MomentCard-flag {
+  color: var(--muted-color);
+  font-size: 13px;
+}
+.MomentCard-time::before,
+.MomentCard-edited::before {
+  content: '·';
+  margin-right: 6px;
+}
+.MomentCard-badge {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--control-bg);
+  color: var(--control-color);
+
+  &--alert {
+    background: var(--alert-error-bg);
+    color: var(--alert-error-color);
+  }
+}
+.MomentCard-menu {
+  margin-left: auto;
+
+  .Button--icon {
+    color: var(--muted-color);
+    width: 30px;
+    height: 30px;
+    padding: 0;
+  }
+}
+.MomentCard-repostedBy {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--muted-color);
+  padding-left: 40px;
+
+  a {
+    color: var(--muted-color);
+  }
+}
+.MomentCard-quote {
+  margin-top: 10px;
+  border: 1px solid var(--control-bg);
+  border-radius: var(--border-radius);
+}
+.MomentCard-unavailable {
+  padding: 12px;
+  margin: 6px 0;
+  color: var(--muted-color);
+  background: var(--control-bg-light, var(--control-bg));
+  border-radius: var(--border-radius);
+  font-style: italic;
+}
+.Moment-body {
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+
+  p {
+    margin: 0 0 0.6em;
+  }
+  > :last-child {
+    margin-bottom: 0;
+  }
+  img {
+    max-width: 100%;
+  }
+  .Hashtag,
+  .MomentTopic {
+    font-weight: 600;
+  }
+}
+
+// ── Media ───────────────────────────────────────────────────────────────────
+
+.MomentMedia {
+  margin-top: 10px;
+}
+.MomentMedia-grid {
+  display: grid;
+  gap: 3px;
+  border-radius: calc(var(--border-radius) * 2);
+  overflow: hidden;
+  max-height: 520px;
+
+  &--1 {
+    max-width: 100%;
+    max-height: 520px;
+  }
+  &--2 {
+    grid-template-columns: 1fr 1fr;
+    aspect-ratio: 16 / 9;
+  }
+  &--3 {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    aspect-ratio: 16 / 9;
+
+    .MomentMedia-cell:first-child {
+      grid-row: span 2;
+    }
+  }
+  &--4 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    aspect-ratio: 16 / 9;
+  }
+  &--carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    max-height: none;
+    border-radius: calc(var(--border-radius) * 2);
+
+    .MomentMedia-cell {
+      flex: 0 0 80%;
+      aspect-ratio: 4 / 3;
+      scroll-snap-align: start;
+    }
+  }
+}
+.MomentMedia-cell {
+  position: relative;
+  background: var(--control-bg);
+  min-height: 0;
+  overflow: hidden;
+
+  img,
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+.MomentMedia-grid--1 .MomentMedia-cell {
+  img,
+  video {
+    max-height: 520px;
+    object-fit: contain;
+    background: #000;
+  }
+}
+.MomentMedia-open {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: zoom-in;
+  background: none;
+}
+.MomentMedia-badge {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.MomentVoice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--control-bg);
+  max-width: 420px;
+
+  audio {
+    flex: 1;
+    min-width: 0;
+    height: 34px;
+  }
+}
+.MomentVoice-icon {
+  color: var(--primary-color);
+}
+.MomentVoice-length {
+  font-size: 12px;
+  color: var(--muted-color);
+  font-variant-numeric: tabular-nums;
+}
+
+// ── Link cards ──────────────────────────────────────────────────────────────
+
+.MomentEmbeds {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+.MomentEmbed {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--control-bg);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+
+  &:hover {
+    text-decoration: none;
+    background: var(--control-bg-light, var(--control-bg));
+  }
+}
+.MomentEmbed-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+.MomentEmbed-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.MomentEmbed-kind {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted-color);
+  font-weight: bold;
+}
+.MomentEmbed-title {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.MomentEmbed-excerpt {
+  font-size: 13px;
+  color: var(--muted-color);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.MomentEmbed-meta {
+  font-size: 12px;
+  color: var(--muted-more-color);
+}
+
+// ── Actions ─────────────────────────────────────────────────────────────────
+
+.MomentCard-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 8px 0 0 -8px;
+  flex-wrap: wrap;
+
+  .Button--link,
+  .MomentAction {
+    color: var(--muted-color);
+    padding: 6px 8px;
+    font-size: 13px;
+    border-radius: var(--border-radius);
+    min-height: 32px;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--primary-color);
+      background: var(--control-bg-light, var(--control-bg));
+      text-decoration: none;
+    }
+  }
+  .MomentAction--active {
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+  .MomentAction--static:hover {
+    color: var(--muted-color);
+    background: none;
+  }
+  .Dropdown-toggle .Button-caret {
+    display: none;
+  }
+}
+.MomentAction-react {
+  position: relative;
+}
+.MomentReactions {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+.MomentReactions-count {
+  margin-left: 4px;
+}
+.MomentReaction-emoji {
+  font-size: 15px;
+  line-height: 1;
+}
+.MomentReactionPicker {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  z-index: var(--zindex-dropdown);
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--body-bg);
+  box-shadow: 0 4px 16px var(--shadow-color);
+  border: 1px solid var(--control-bg);
+}
+.MomentReactionPicker-item {
+  border: 0;
+  background: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 0.1s;
+
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.2);
+    background: var(--control-bg);
+  }
+  &.is-active {
+    background: var(--control-bg);
+  }
+}
+
+// ── Replies ─────────────────────────────────────────────────────────────────
+
+.MomentReplies {
+  margin-top: 8px;
+  border-top: 1px solid var(--control-bg);
+  padding-top: 4px;
+}
+.MomentReplies-sort {
+  display: flex;
+  gap: 4px;
+  margin: 6px 0;
+
+  .Button.active {
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+}
+.MomentReplies-locked {
+  color: var(--muted-color);
+  font-size: 13px;
+  margin: 8px 0;
+}
+.MomentReplies-more {
+  margin: 4px 0;
+}
+.MomentReply {
+  .MomentCard {
+    padding: 10px 0;
+    border-bottom: 0;
+  }
+  .MomentCard-avatar .Avatar {
+    --size: 32px;
+  }
+}
+.MomentReply-children {
+  margin-left: 16px;
+  padding-left: 14px;
+  border-left: 2px solid var(--control-bg);
+}
+.MomentReply-composer {
+  margin-left: 44px;
+}
+
+// ── Lightbox ────────────────────────────────────────────────────────────────
+
+.MomentLightbox-open {
+  overflow: hidden;
+}
+.MomentLightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--zindex-modal);
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 56px;
+}
+.MomentLightbox-media {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.MomentLightbox .Button--icon {
+  position: absolute;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+.MomentLightbox-close {
+  top: 12px;
+  right: 12px;
+}
+.MomentLightbox-nav--prev {
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.MomentLightbox-nav--next {
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.MomentLightbox-count {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 13px;
+}
+
+// ── Widgets ─────────────────────────────────────────────────────────────────
+
+.MomentsWidget {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.MomentsWidget-heading {
+  margin: 0 0 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--muted-color);
+}
+.MomentsWidget-item {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+
+  .Avatar {
+    --size: 28px;
+    flex: none;
+  }
+}
+.MomentsWidget-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+.MomentsWidget-link {
+  color: var(--text-color);
+}
+.MomentsWidget-time {
+  color: var(--muted-color);
+  font-size: 12px;
+}
+.MomentsWidget-excerpt {
+  color: var(--muted-color);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.MomentsWidget-topic {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+  font-weight: 600;
+}
+.MomentsWidget-count {
+  font-weight: normal;
+  color: var(--muted-color);
+  font-size: 12px;
+}
+.MomentsWidget-all {
+  padding-top: 6px;
+  font-size: 13px;
+}
+.MomentsWidget-empty,
+.MomentsWidget-done {
+  color: var(--muted-color);
+  font-size: 13px;
+  margin: 0;
+}
+
+// ── Phones ──────────────────────────────────────────────────────────────────
+
+@media (max-width: 767.98px) {
+  .MomentsPage-search {
+    flex: 1 1 100%;
+  }
+  .MomentComposer {
+    padding: 10px;
+  }
+  .MomentComposer-avatar {
+    display: none;
+  }
+  .MomentCard {
+    gap: 10px;
+    padding: 12px 0;
+  }
+  .MomentCard-avatar .Avatar {
+    --size: 36px;
+  }
+  .MomentCard-actions {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-right: 0;
+  }
+  // Icons alone on a phone; counts stay.
+  .MomentAction--word .Button-label {
+    display: none;
+  }
+  .MomentReply-children {
+    margin-left: 6px;
+    padding-left: 10px;
+  }
+  .MomentReply-composer {
+    margin-left: 0;
+  }
+  .MomentMedia-grid--carousel .MomentMedia-cell {
+    flex-basis: 88%;
+  }
+  .MomentLightbox {
+    padding: 56px 8px;
+  }
+  .MomentLightbox-nav {
+    display: none;
+  }
+}
+
+// ── Search dropdown ─────────────────────────────────────────────────────────
+
+.MomentsSearchResult > a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

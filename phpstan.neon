@@ -1,0 +1,20 @@
+includes:
+    - vendor/flarum/phpstan/extension.neon
+
+parameters:
+    # One process: flarum/phpstan's bootstrap installs a test forum the first
+    # time it runs, and parallel workers each start that install at once.
+    parallel:
+        maximumNumberOfProcesses: 1
+    level: 6
+    paths:
+        - extend.php
+        - src
+    # fof/seo is optional and not installed for analysis: the parts Moments
+    # uses are described for the analyser only.
+    scanFiles:
+        - tests/phpstan/optional-extensions.php
+    databaseMigrationsPath:
+        - migrations
+    ignoreErrors:
+        - identifier: missingType.iterableValue

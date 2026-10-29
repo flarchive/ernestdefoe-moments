@@ -1,0 +1,103 @@
+{
+    "name": "ernestdefoe/moments",
+    "description": "Moments — a microblogging social feed for Flarum 2. Short posts in a timeline beside your discussions: photos, video, voice notes, GIFs, nested replies, reactions, reposts, bookmarks, topics, privacy per moment and real-time updates.",
+    "keywords": [
+        "flarum",
+        "flarum-extension",
+        "microblog",
+        "social",
+        "feed",
+        "timeline",
+        "status",
+        "wall"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ernest Defoe",
+            "email": "ernestdefoe@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/ernestdefoe/moments",
+    "support": {
+        "issues": "https://github.com/ernestdefoe/moments/issues",
+        "source": "https://github.com/ernestdefoe/moments"
+    },
+    "funding": [
+        {
+            "type": "other",
+            "url": "https://buymeacoffee.com/ernestdefoe"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "flarum/core": "^2.0"
+    },
+    "suggest": {
+        "flarum/mentions": "@mentions in moments notify the people mentioned.",
+        "ernestdefoe/hashtags": "#topics in moments become the forum's hashtags.",
+        "fof/reactions": "Moments offer the forum's own reaction set.",
+        "fof/upload": "Photos and video in moments are stored by FoF Upload.",
+        "ianm/follow-users": "A Following feed and Followers-only moments.",
+        "flarum/realtime": "New moments arrive without a refresh.",
+        "fof/forum-widgets-core": "Moments widgets for FoF Forum Widgets."
+    },
+    "autoload": {
+        "psr-4": {
+            "Ernestdefoe\\Moments\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ernestdefoe\\Moments\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Moments",
+            "category": "feature",
+            "icon": {
+                "name": "fas fa-feather-pointed",
+                "backgroundColor": "#0ea5e9",
+                "color": "#fff"
+            },
+            "optional-dependencies": [
+                "flarum/mentions",
+                "flarum/realtime",
+                "ernestdefoe/hashtags",
+                "fof/reactions",
+                "fof/upload",
+                "ianm/follow-users",
+                "fof/forum-widgets-core"
+            ]
+        }
+    },
+    "require-dev": {
+        "ernestdefoe/hashtags": "^2.0",
+        "flarum/markdown": "^2.0",
+        "flarum/mentions": "^2.0",
+        "flarum/phpstan": "^2.0",
+        "flarum/testing": "^2.0",
+        "ianm/follow-users": "^2.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": [
+            "@test:integration"
+        ],
+        "test:integration": "phpunit -c tests/phpunit.integration.xml",
+        "test:setup": "@php tests/integration/setup.php",
+        "analyse:phpstan": "phpstan analyse"
+    },
+    "scripts-descriptions": {
+        "test": "Runs all tests.",
+        "test:integration": "Runs all integration tests.",
+        "test:setup": "Sets up a database for use with integration tests. Execute this only once.",
+        "analyse:phpstan": "Run static analysis"
+    },
+    "minimum-stability": "beta",
+    "prefer-stable": true
+}
